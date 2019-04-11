@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
-import math
+import note
 
 GRAMS = 0.001
 MM = 0.001
@@ -8,47 +8,6 @@ MM_PER_INCH = 25.4
 INCHES = MM_PER_INCH * MM
 GRAV = 9.807
 LBS_PER_KG = 2.20462
-
-def midi_to_freq(m):
-  return 440.0 * math.pow(2.0, float(m - 69) / 12.0)
-
-def note_to_midi(n):
-  """convert an SPN note name to a midi note"""
-  n = n.upper()
-  x = list(n)
-  if len(x) == 2:
-    name = x[0]
-    accidental = None
-    octave = x[1]
-  elif len(x) == 3:
-    name = x[0]
-    accidental = x[1]
-    octave = x[2]
-  else:
-    assert False, 'bad note length'
-  # octave
-  if octave in ('0','1','2','3','4','5','6','7','8'):
-    # note: midi octave numbering is +1 on SPN octave numbering
-    midi = (ord(octave) - ord('0') + 1) * 12
-  else:
-    assert False, 'bad octave number'
-  # note
-  if name in ('A','B','C','D','E','F','G'):
-    idx = ord(name) - ord('A')
-    midi += (9,11,0,2,4,5,7)[idx]
-  else:
-    assert False, 'bad note name'
-  # accidental
-  if accidental == '#':
-    midi += 1
-  elif accidental == 'B':
-    midi -= 1
-  elif accidental is not None:
-    assert False, 'bad accidental name'
-  return midi
-
-def note_to_freq(n):
-  return midi_to_freq(note_to_midi(n))
 
 class gstring(object):
 
@@ -99,21 +58,21 @@ def main():
 
   d = 25.0 * INCHES
 
-  print 'standard 6-string tuning'
-  print string_setup(s0, d, 'e2')
-  print string_setup(s1, d, 'a2')
-  print string_setup(s2, d, 'd3')
-  print string_setup(s3, d, 'g3')
-  print string_setup(s4, d, 'b3')
-  print string_setup(s5, d, 'e4')
+  print('standard 6-string tuning')
+  print(string_setup(s0, d, 'e2'))
+  print(string_setup(s1, d, 'a2'))
+  print(string_setup(s2, d, 'd3'))
+  print(string_setup(s3, d, 'g3'))
+  print(string_setup(s4, d, 'b3'))
+  print(string_setup(s5, d, 'e4'))
 
 
-  print 'open G 3-string options'
-  print string_setup(s1, d, 'g2')
-  print string_setup(s3, d, 'g3')
-  print string_setup(s5, d, 'g4')
-  print string_setup(s2, d, 'd3')
-  print string_setup(s5, d, 'd4')
+  print('open G 3-string options')
+  print(string_setup(s1, d, 'g2'))
+  print(string_setup(s3, d, 'g3'))
+  print(string_setup(s5, d, 'g4'))
+  print(string_setup(s2, d, 'd3'))
+  print(string_setup(s5, d, 'd4'))
 
 
 main()
