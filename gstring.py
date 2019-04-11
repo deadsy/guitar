@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import math
 import note
 
 GRAMS = 0.001
@@ -39,7 +40,7 @@ class gstring(object):
 
 
 def string_setup(s, l, n):
-  f = note_to_freq(n)
+  f = note.note(n).freq()
   x = []
   x.append(str(s))
   x.append(n)
