@@ -40,7 +40,7 @@ class gstring(object):
 
 
 def string_setup(s, l, n):
-  f = note.note(n).freq()
+  f = note.freq(note.spn2midi(n))
   x = []
   x.append(str(s))
   x.append(n)

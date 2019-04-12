@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-scale_set = {}
+import note
 
 class scale(object):
 
-  def __init__(self, name, steps):
-    global scale_Set
-    self.name = name
+  def __init__(self, root, steps):
+    self.spn = root
+    self.midi = note.spn2midi(root)
     self.steps = steps
-    scale_set[name] = self
+    self.check()
 
   def check(self):
     n = 0
@@ -18,19 +18,19 @@ class scale(object):
 
   def __str__(self):
     s = []
-    s.append('%s: ' % self.name)
+    s.append('%s: ' % self.spn)
     s.append('%s' % str(self.steps))
     return ''.join(s)
 
-scale('ionian', (2,2,1,2,2,2,1))
-scale('dorian', (2,1,2,2,2,1,2))
-scale('phrygian', (1,2,2,2,1,2,2))
-scale('lydian', (2,2,2,1,2,2,1))
-scale('mixolydian', (2,2,1,2,2,1,2))
-scale('aeolian', (2,1,2,2,1,2,2))
-scale('locrian', (1,2,2,1,2,2,2))
+ionian = (2,2,1,2,2,2,1)
+dorian = (2,1,2,2,2,1,2)
+phrygian = (1,2,2,2,1,2,2)
+lydian = (2,2,2,1,2,2,1)
+mixolydian = (2,2,1,2,2,1,2)
+aeolian = (2,1,2,2,1,2,2)
+locrian = (1,2,2,1,2,2,2)
 
 def main():
-  print('%s' % scale_set['ionian'])
+  print('%s' % scale('c', ionian))
 
 main()
