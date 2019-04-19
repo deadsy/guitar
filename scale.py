@@ -9,6 +9,8 @@ lydian = (2,2,2,1,2,2,1)
 mixolydian = (2,2,1,2,2,1,2)
 aeolian = (2,1,2,2,1,2,2) # aka "natural minor"
 locrian = (1,2,2,1,2,2,2)
+harmonic_minor = (2,1,2,2,1,3,1)
+melodic_minor = (2,1,2,2,2,2,1)
 
 class scale(object):
 
@@ -49,39 +51,48 @@ class scale(object):
     return ''.join(s)
 
 
-class guitar_string(object):
+class guitar(object):
 
-  def __init__(self, n, frets):
-    start = note.spn2midi(n)
-    self.notes = range(start, start + frets)  
+  def __init__(self, strings, frets):
+    self.frets = frets
+    self.string = []
+    for n in strings:
+      start = note.spn2midi(n)
+      self.string.append(range(start, start + frets))
 
-  def positions(self, notes):
+  def fretboard(self, scale):
     """return a string indicating the fret positions that are in the note set"""
+    fb = []
+    # fret numbering
     s = []
-    # open string
-    if self.notes[0] in notes:
-      s.append('O|')
-    else:
-      s.append('X|')
-    # fretted string
-    for n in self.notes[1:]:
-      if n in notes:
-        s.append('--O|')
+    s.append('    ')
+    for i in range(1, self.frets):
+      s.append('  %2d' % i)
+    fb.append(''.join(s))
+    # positions for each string
+    for notes in self.string:
+      s = []
+      # open string
+      if notes[0] in scale:
+        s.append('O|')
       else:
-        s.append('---|')
-    return ''.join(s)
+        s.append('X|')
+      # fretted string
+      for n in notes[1:]:
+        if n in scale:
+          s.append('--O|')
+        else:
+          s.append('---|')
+      fb.append('%s %s' % (note.midi2spn(notes[0]), ''.join(s)))
+    return '\n'.join(fb)
 
 if __name__ == '__main__':
-  #s = scale('c', ionian)
-  s = scale('a', aeolian)
-  notes = s.gen_notes()
-  #print(' '.join(note.midi2spn(n) for n in s.gen_notes()))
-  frets = 19
-  s = []
-  s.append('    ')
-  for i in range(1, frets):
-    s.append('  %2d' % i)
-  print(''.join(s))
-  for n in ('e5', 'b4', 'g4', 'd4', 'a3', 'e3'):
-    gs = guitar_string(n, frets)
-    print('%s %s' % (n, gs.positions(notes)))
+  #s = scale('d', ionian)
+  #s = scale('a', aeolian)
+  #s = scale('b', melodic_minor)
+  #s = scale('b', harmonic_minor)
+  #s = scale('eb', lydian)
+  s = scale('bb', dorian)
+  g = guitar(('e5', 'b4', 'g4', 'd4', 'a3', 'e3'), 19)
+  print(g.fretboard(s.gen_notes()))
+
