@@ -50,30 +50,30 @@ def string_setup(s, l, n):
 
 def main():
 
-  s0 = gstring('EB1146', 46, (7.306 - 0.166) * GRAMS, 1.0) # E2
-  s1 = gstring('EB1136', 36, (4.570 - 0.166) * GRAMS, 1.0) # A2
-  s2 = gstring('EB1126', 26, (2.539 - 0.166) * GRAMS, 1.0) # D3
-  s3 = gstring('EB1017', 17, (1.340 - 0.166) * GRAMS, 1.0) # G3
-  s4 = gstring('EB1013', 13, (0.859 - 0.166) * GRAMS, 1.0) # B3
-  s5 = gstring('EB1010', 10, (0.571 - 0.166) * GRAMS, 1.0) # E4
+  s0 = gstring('EB1146', 46, (7.306 - 0.166) * GRAMS, 1.0) # E3
+  s1 = gstring('EB1136', 36, (4.570 - 0.166) * GRAMS, 1.0) # A3
+  s2 = gstring('EB1126', 26, (2.539 - 0.166) * GRAMS, 1.0) # D4
+  s3 = gstring('EB1017', 17, (1.340 - 0.166) * GRAMS, 1.0) # G4
+  s4 = gstring('EB1013', 13, (0.859 - 0.166) * GRAMS, 1.0) # B4
+  s5 = gstring('EB1010', 10, (0.571 - 0.166) * GRAMS, 1.0) # E5
 
   d = 25.0 * INCHES
 
   print('standard 6-string tuning')
-  print(string_setup(s0, d, 'e2'))
-  print(string_setup(s1, d, 'a2'))
-  print(string_setup(s2, d, 'd3'))
-  print(string_setup(s3, d, 'g3'))
-  print(string_setup(s4, d, 'b3'))
-  print(string_setup(s5, d, 'e4'))
+  print(string_setup(s0, d, 'e3'))
+  print(string_setup(s1, d, 'a3'))
+  print(string_setup(s2, d, 'd4'))
+  print(string_setup(s3, d, 'g4'))
+  print(string_setup(s4, d, 'b4'))
+  print(string_setup(s5, d, 'e5'))
 
 
   print('open G 3-string options')
-  print(string_setup(s1, d, 'g2'))
-  print(string_setup(s3, d, 'g3'))
-  print(string_setup(s5, d, 'g4'))
-  print(string_setup(s2, d, 'd3'))
-  print(string_setup(s5, d, 'd4'))
+  print(string_setup(s1, d, 'g3'))
+  print(string_setup(s3, d, 'g4'))
+  print(string_setup(s5, d, 'g5'))
+  print(string_setup(s2, d, 'd4'))
+  print(string_setup(s5, d, 'd5'))
 
 
 main()
